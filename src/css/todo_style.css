@@ -26,7 +26,8 @@
     box-shadow: 2px 2px 2px var(--swatch-primary); 
     color: rgb(255,200,25);
     font-weight: bold;
-    font-size: 18pt;
+    font-size: 15pt;
+    font-family: var(--font-primary);
 }
 
 #left-sidebar {
@@ -35,9 +36,12 @@
 }
 
 #left-sidebar-header {
+    display:flex;
     border-bottom: dotted;
     font-size: 14pt;
     font-weight: bold;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 #todo-list-header-card {
@@ -52,13 +56,51 @@
 }
 
 #title-div {
-    color: rgb(255,200,25);
+    /* color: rgb(255,200,25);
     font-weight: bold;
-    font-size: 18pt;
+    font-size: 18pt; */
 }
 
 #todo-list-table-header {
     border-bottom: dotted;
+}
+#modal-container{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index:1000;
+    text-align: center;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+#modal-content {
+    background-color: var(--swatch-complement);
+    color:white;
+    width:50%;
+    position: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position:fixed;
+    left:25%;
+    top:20%;
+}
+.delete-text {
+    padding:8px;
+}
+#delete-choices {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#confirm-delete-button {
+    display:flex;
+    text-align: left;
+}
+#cancel-delete-button {
+    display:flex;
+    text-align:right;
 }
 
 .list-header-card {
@@ -98,6 +140,16 @@
 #add-list-button {
     color: var(--swatch-accent);
 }
+#confirm-delete-button:hover {
+    cursor:pointer;
+    background-color: var(--swatch-contrast);
+    text-align: center;
+}
+#cancel-delete-button:hover {
+    cursor:pointer;
+    background-color: var(--swatch-contrast);
+    text-align: center;
+}
 
 .status-incomplete {
     color: var(--swatch-accent);
@@ -110,3 +162,46 @@
 #add-item-button, #delete-list-button, #close-list-button {
     text-align: center;
 }
+select.item-col {
+    color:white;
+    background-color:var(--swatch-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+input {
+    color:white;
+    background-color:var(--swatch-primary)
+}
+/* .list-item-card:hover {
+    background-color:var(--swatch-complement) ;
+} */
+
+.item-col:hover {
+    background-color: grey;
+}
+#add-undo-redo-box:hover {
+    background-color: var(--swatch-contrast);
+    cursor: pointer;
+}
+#list-control-header {
+    background-color: var(--swatch-complement);
+    margin-top: 0px;
+}
+.list-controls-col {
+    display:flex;
+    justify-content: space-evenly;
+}
+.yellow {
+    color:var(--swatch-accent)
+}
+.blue {
+    color: var(--swatch-text-accent);
+}
+.highlight {
+    background-color: var(--swatch-primary);
+}
+.disabled {
+    opacity:40%;
+}
+

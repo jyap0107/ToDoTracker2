@@ -4,9 +4,8 @@ import React, { Component } from 'react'
 class ListLink extends Component {
     constructor(props) {
         super(props);
-        
         // DISPLAY WHERE WE ARE
-        console.log("\t\t\tListLink " + this.props.toDoList.key + " constructor");
+        // console.log("\t\t\tListLink " + this.props.toDoList.key + " constructor");
     }
 
     componentDidMount = () => {
@@ -20,15 +19,27 @@ class ListLink extends Component {
 
     render() {
         // DISPLAY WHERE WE ARE
-        console.log("\t\t\tListLink render");
-
+        // console.log("\t\t\tListLink render");
+        let listLink;
+        if (this.props.clickedOn == "firstList" && this.props.id == this.props.currentList.id) {
+            listLink = <input 
+            className={this.props.currentList == this.props.toDoList ? "todo-list-button highlight" : "todo-list-button"}
+            defaultValue={this.props.toDoList.name}
+            onChange={(e) => this.props.handleListNameChange(e.target.value, this.props.id)}
+        >
+        </input>
+        }
+        else {
+            listLink = <div 
+            className={this.props.currentList == this.props.toDoList ? "todo-list-button highlight" : "todo-list-button"}
+            onClick={this.props.id == this.props.currentList.id ? this.props.swapToInput.bind(this, this.props.id, "firstList"): this.handleLoadList}
+        >
+            {this.props.toDoList.name}<br />
+        </div>
+        }
         return (
-            <div 
-                className='todo-list-button'
-                onClick={this.handleLoadList}
-            >
-                {this.props.toDoList.name}<br />
-            </div>
+            <div>{listLink}</div>
+            
         )
     }
 }

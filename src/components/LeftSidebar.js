@@ -29,8 +29,15 @@ class LeftSidebar extends Component {
                     this.props.toDoLists.map((toDoList) => (
                         <ListLink
                             key={toDoList.id}
+                            id={toDoList.id}
+                            clickedOn={this.props.clickedOn}
+                            clickedId={this.props.clickedId}
+                            position={this.props.toDoLists.indexOf(toDoList)}
+                            swapToInput={this.props.swapToInput}
+                            currentList={this.props.currentList}
                             toDoList={toDoList}                                // PASS THE LIST TO THE CHILDREN
-                            loadToDoListCallback={this.props.loadToDoListCallback} />  // PASS THE CALLBACK TO THE CHILDREN
+                            loadToDoListCallback={this.props.loadToDoListCallback}
+                            handleListNameChange={this.props.handleListNameChange} />  // PASS THE CALLBACK TO THE CHILDREN
                     ))
                 }
                 </div>
