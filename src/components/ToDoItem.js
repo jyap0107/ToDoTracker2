@@ -10,28 +10,18 @@ class ToDoItem extends Component {
         this.id = -1;
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tToDoItem " + this.props.toDoListItem.id + " constructor");
-        // Detect outside click
-        // this.wrapperRef = React.createRef();
-        // this.setWrapperRef = this.setWrapperRef.bind(this);
-        // this.handleClickOutside = this.handleClickOutside.bind(this, this.props.swapToDiv);
+        this.textInput = React.createRef();
+        this.focusRef = this.focusRef.bind(this);
     }
-    // setWrapperRef(node) {
-    //     this.wrapperRef = node;
-    //   }
-    // componentDidMount = () => {
-    //     // DISPLAY WHERE WE ARE
-    //     console.log("\t\t\tToDoItem " + this.props.toDoListItem.id + " did mount");
-    //     document.addEventListener('mousedown', this.handleClickOutside);
+    focusRef = () => {
+        this.textInput.current.focus();
+    }
+    showIt = () => {
+        console.log("chocco mate");
+    }
+    // hideIt = () => {
+    //     this.props.swapToDiv(this, l);
     // }
-    // componentWillUnmount = () => {
-    //     document.removeEventListener('mousedown', this.handleClickOutside);
-    // }
-    // handleClickOutside(event) {
-    //     if (this.wrapperRef && typeof this.wrapperRef.current === 'undefined' && !this.wrapperRef.contains(event.target)){
-    //         [Somehow insert callback here?]
-    //     }
-    // }
-
     render() {
         // DISPLAY WHERE WE ARE
         // console.log("\t\t\tToDoItem render");
@@ -43,11 +33,13 @@ class ToDoItem extends Component {
         //Set description
         let description;
         if (this.props.clickedOn == "description" && listItem.id == this.props.clickedId) {
-            description = <input
-                ref={this.setWrapperRef} 
+            description = <input autoFocus
                 className='item-col task-col'
-                defaultValue={listItem.description} 
-                onChange={(e) => this.props.handleDescriptionChange(e.target.value, listItem.id)}></input>
+                defaultValue={listItem.description}
+                ref={this.textInput}
+                onFocus={this.showIt}
+                onBlur={(e) => this.props.swapToDiv(listItem.id, e.target.value, "description")}
+                onClick={this.focusRef}></input>
         }
         else {
             description = <div 
@@ -58,11 +50,14 @@ class ToDoItem extends Component {
         //Set due date
         let dueDate;
         if (this.props.clickedOn == "dueDate" && listItem.id == this.props.clickedId) {
-            dueDate = <input
+            dueDate = <input autoFocus
                 className='item-col task-col'
                 type="date"
                 defaultValue={listItem.due_date}
-                onChange={(e) => this.props.handleDueDateChange(e.target.value, listItem.id)}></input>
+                ref={this.textInput}
+                onFocus={this.showIt}
+                onClick={this.focusRef}
+                onBlur={(e) => this.props.swapToDiv(listItem.id, e.target.value, "dueDate")}></input>
         }
         else {
             dueDate = <div
@@ -72,10 +67,13 @@ class ToDoItem extends Component {
         }
         let status;
         if (this.props.clickedOn == "status" && listItem.id == this.props.clickedId) {
-            status = <select
+            status = <select autoFocus
                 className='item-col task-col'
                 defaultValue={listItem.status}
-                onChange={(e) => this.props.handleStatusChange(e.target.value, listItem.id)}>
+                ref={this.textInput}
+                onFocus={this.showIt}
+                onClick={this.focusRef}
+                onBlur={(e) => this.props.swapToDiv(listItem.id, e.target.value, "status")}>
                     <option value="complete">Complete</option>
                     <option value="incomplete">Incomplete</option>
                 </select>

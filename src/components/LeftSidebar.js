@@ -17,11 +17,11 @@ class LeftSidebar extends Component {
             <div id="left-sidebar">
                 <div id="left-sidebar-header" class="section-header">
                     <span class="left-sidebar-header-text">Todolists</span>
-                    <span class="left-sidebar-controls" id="add-undo-redo-box">
+                    <span class="left-sidebar-controls" id={this.props.currentList.id == null ? "add-undo-redo-box" : "disabled"}>
                         <AddBox 
                             id="add-list-button"
-                            className="material-icons todo_button"
-                            onClick={this.handleAddNewList} />
+                            className={this.props.currentList.id == null ? "material-icons todo_button" : "disabled"}
+                            onClick={this.props.currentList.id == null ? this.handleAddNewList : undefined} />
                     </span>
                 </div>
                 <div id="todo-lists-list">
@@ -34,6 +34,7 @@ class LeftSidebar extends Component {
                             clickedId={this.props.clickedId}
                             position={this.props.toDoLists.indexOf(toDoList)}
                             swapToInput={this.props.swapToInput}
+                            swapToDiv={this.props.swapToDiv}
                             currentList={this.props.currentList}
                             toDoList={toDoList}                                // PASS THE LIST TO THE CHILDREN
                             loadToDoListCallback={this.props.loadToDoListCallback}
