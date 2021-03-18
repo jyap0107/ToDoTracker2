@@ -1,15 +1,18 @@
 #root {
     position:absolute;
-    width: 100%;
+    width: 99%;
     height:100%;
 }
-
+html, body {
+    margin: 2px;
+    overflow: hidden;
+}
 #navbar {
     position:absolute;
     height: 50px;
     top:0%;
     /* left:0%; */
-    width: 98%;
+    width: 100%;
     height: 5%;
     margin:auto;
     padding-left: 10px;
@@ -22,7 +25,7 @@
 
 #left-sidebar {
     position:absolute;
-    height:94%;
+    height:93%;
     width:13%;
     top:5.5%;
     left:0%;
@@ -31,13 +34,12 @@
 
 #workspace {
     position:absolute;
-    height:94%;
-    width:85.5%;
+    height:93%;
+    width:86.5%;
     top:5.5%;
     left:13%;
     border-left: dotted;
     padding-left: 15px;
-    padding-right: 25px;
     grid-column: 2 span 1;
     grid-row: 2 span 1;
     display: flex;
@@ -77,9 +79,10 @@
 }
 
 #todo-list-header-card {
-    padding-top:25px;
+    padding-top: 9.5px;
     height:30px;
     width: 100%;
+    padding-bottom: 0px;
 }
 
 #todo-list-items-div {
@@ -101,6 +104,9 @@
 .item-col {
     width: 25%;
     max-width: 25%;
+    display:flex;
+    vertical-align: middle;
+    align-items: center;
 }
 input.item-col {
     box-sizing: border-box

@@ -122,7 +122,7 @@ class App extends Component {
   makeNewToDoListItem() {
     let newToDoListItem = {
       description: "No Description",
-      dueDate: "none",
+      dueDate: "undefined",
       status: "incomplete",
       id: this.state.nextListItemId
     };
@@ -402,10 +402,20 @@ class App extends Component {
       hasRedo: this.tps.hasTransactionToRedo()
     })
   }
+  handleKeyPress = (event) => {
+    if (event.ctrlKey && event.key == "z") {
+      this.undo();
+    }
+    if (event.ctrlKey && event.key == "y") {
+      this.redo();
+    }
+  }
   render() {
     let items = this.state.currentList.items;
     return (
-      <div id="root">
+      <div id="root"
+      tabIndex='0'
+      onKeyDown={this.handleKeyPress}>
         <DeleteListConfirmation
           showModal={this.state.showModal}
           closeModal={this.state.showModal}

@@ -48,6 +48,8 @@
     border-bottom: dotted;
     font-size: 14pt;
     font-weight: bold;
+    display:flex;
+    align-items: center;
 }
 
 #workspace {
