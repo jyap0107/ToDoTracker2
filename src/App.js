@@ -35,7 +35,7 @@ class App extends Component {
     console.log("recentLists: " + recentLists);
     if (!recentLists) {
       recentLists = JSON.stringify(testData.toDoLists);
-      localStorage.setItem("toDoLists", recentLists);
+      localStorage.setItem("recentLists", recentLists);
     }
     recentLists = JSON.parse(recentLists);
 
@@ -88,7 +88,7 @@ class App extends Component {
       clickedOn: "otherList",
       hasUndo: false,
       hasRedo: false
-    });
+    }, this.afterToDoListsChangeComplete);
     this.tps.clearAllTransactions();
   }
   /*
@@ -122,7 +122,7 @@ class App extends Component {
   makeNewToDoListItem() {
     let newToDoListItem = {
       description: "No Description",
-      dueDate: "undefined",
+      due_date: "No Date",
       status: "incomplete",
       id: this.state.nextListItemId
     };
@@ -136,14 +136,14 @@ class App extends Component {
     this.setState({
       currentList: this.state.currentList,
       nextListItemId: this.state.nextListItemId+1
-    })
+    }, this.afterToDoListsChangeComplete)
     return id;
   }
   addItemAtIndex = (item, index) => {
     this.state.currentList.items.splice(index, 0, item);
     this.setState({
       currentList: this.state.currentList,
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   addCustomItemToList = (desc, due, stat, givenId) => {
     let newItem = {
@@ -156,8 +156,8 @@ class App extends Component {
     let id = this.state.nextListItemId;
     this.setState({
       currentList: this.state.currentList,
-      nextListItemId: this.state.nextListItemId+1,
-    })
+      nextListItemId: this.staste.nextListItemId+1,
+    }, this.afterToDoListsChangeComplete)
     return id;
   }
   deleteCurrentList = () => {
@@ -166,7 +166,7 @@ class App extends Component {
       toDoLists: this.state.toDoLists,
       currentList: {items: []},
       showModal: !this.state.showModal
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   moveItemUp = (id) => {
     for (let i = 1; i < this.state.currentList.items.length; i++) {
@@ -179,7 +179,7 @@ class App extends Component {
     }
     this.setState({
       currentList: this.state.currentList,
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   moveItemDown = (id) => {
     for (let i = this.state.currentList.items.length-2; i >= 0; i--) {
@@ -192,7 +192,7 @@ class App extends Component {
     }
     this.setState({
       currentList: this.state.currentList,
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   deleteItem = (id) => {
     let item;
@@ -243,7 +243,7 @@ class App extends Component {
       currentList: this.state.currentList,
       clickedOn: "",
       clickedId: "",
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   handleDueDateChange = (value, id) => {
     this.state.currentList.items.map((item) => ((item.id == id ? item.due_date = value : item.due_date = item.due_date)
@@ -252,7 +252,7 @@ class App extends Component {
       currentList: this.state.currentList,
       clickedOn: "",
       clickedId: "",
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   handleStatusChange = (value, id) => {
     this.state.currentList.items.map((item) => ((item.id == id ? item.status = value : item.status = item.status)
@@ -261,7 +261,7 @@ class App extends Component {
       currentList: this.state.currentList,
       clickedOn: "",
       clickedId: "",
-    })
+    }, this.afterToDoListsChangeComplete)
   }
 
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
@@ -270,7 +270,7 @@ class App extends Component {
 
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
-    localStorage.setItem("recent_work", toDoListsString);
+    localStorage.setItem("recentLists", toDoListsString);
   }
   toggleDeleteListConfirmation = () => {
     if (this.state.currentList.id != null) {
@@ -282,7 +282,7 @@ class App extends Component {
   closeList = () => {
     this.setState({
       currentList: {items: []}
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   handleListNameChange = (value, id) => {
       this.state.toDoLists.map((list) => (list.id == id ? list.name = value : list.name = list.name));
@@ -290,7 +290,7 @@ class App extends Component {
         toDoLists:this.state.toDoLists,
         clickedOn: "",
         clickedId:""
-      })
+      }, this.afterToDoListsChangeComplete)
   }
   getItemAttribute = (id, attribute) => {
     let items = this.state.currentList.items;
@@ -339,7 +339,7 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   descriptionChangeTransaction = (value, id) => {
     if (value == this.getItemAttribute(id, "description")) {
@@ -354,10 +354,10 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   dueDateChangeTransaction = (value, id) => {
-    if (value == this.getItemAttribute(id, "dueDate")) {
+    if (value == this.getItemAttribute(id, "dueDate") || value == "") {
       this.setState({
         clickedOn: "",
         clickedId: "",
@@ -369,7 +369,7 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   statusChangeTransaction = (value, id) => {
     if (value == this.getItemAttribute(id, "status")) {
@@ -384,7 +384,7 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   moveItemUpTransaction = (id) => {
     let transaction = new MoveItemUp_Transaction(this, id);
@@ -392,7 +392,7 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   moveItemDownTransaction = (id) => {
     let transaction = new MoveItemDown_Transaction(this, id);
@@ -400,7 +400,7 @@ class App extends Component {
     this.setState({
       hasUndo: this.tps.hasTransactionToUndo(),
       hasRedo: this.tps.hasTransactionToRedo()
-    })
+    }, this.afterToDoListsChangeComplete)
   }
   handleKeyPress = (event) => {
     if (event.ctrlKey && event.key == "z") {

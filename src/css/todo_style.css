@@ -41,7 +41,7 @@
     font-size: 14pt;
     font-weight: bold;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-evenly
 }
 
 #todo-list-header-card {
@@ -51,6 +51,8 @@
     display:flex;
     align-items: center;
 }
+
+
 
 #workspace {
     background-color: var(--swatch-primary);
@@ -62,6 +64,7 @@
     font-weight: bold;
     font-size: 18pt; */
 }
+
 
 #todo-list-table-header {
     border-bottom: dotted;
@@ -179,6 +182,9 @@ input {
     background-color:var(--swatch-complement) ;
 } */
 
+/* #todo-list-items-div .list-item-card:hover {
+    background-color: #545b66;
+} */
 .item-col:hover {
     background-color: grey;
 }

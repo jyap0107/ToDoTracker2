@@ -9,7 +9,6 @@ export default class DueDateChange_Transaction extends jsTPS_Transaction {
     }
     doTransaction() {
         this.prevValue = this.app.getItemAttribute(this.id, "dueDate");
-        console.log(this.prevValue);
         this.app.handleDueDateChange(this.value, this.id);
     }
     undoTransaction() {

@@ -6,16 +6,19 @@
 html, body {
     margin: 2px;
     overflow: hidden;
+    color: beige;
 }
 #navbar {
     position:absolute;
     height: 50px;
-    top:0%;
     /* left:0%; */
     width: 100%;
-    height: 5%;
-    margin:auto;
+    height: 4.7%;
     padding-left: 10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: px;
+    margin-bottom: 10px;
 }
 
 #title-div {
@@ -29,7 +32,7 @@ html, body {
     width:13%;
     top:5.5%;
     left:0%;
-    padding-left: 11.5px;
+    padding-left: 0px;
 }
 
 #workspace {
@@ -54,20 +57,40 @@ html, body {
     display: grid;
     grid-template-columns: 60% 40%;
     white-space: nowrap;
+    margin-left:15px;
 }
 #todo-lists-list {
+    display:flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-direction:column;
     position:absolute;
     text-align: center;
-    height:80%;
+    height:91%;
     width:100%;
     top: 8%;
-    padding-top: 15px;
+    padding-top: 0px;
+    margin-left: 2.5px;
+    scrollbar-width: thin;
+}
+#todo-lists-list::-webkit-scrollbar {
+    width: 7px;
+    scrollbar-width: thin;
+}
+#todo-lists-list::-webkit-scrollbar-track {
+    background-color:transparent;
+}
+#todo-lists-list::-webkit-scrollbar-thumb {
+    background-color: rgb(130,130,130);
+    border-radius: 10px;
+    border: 3px transparent;
+    background-clip: padding-box;
 }
 
 .todo-list-button {
     padding-top:13px;
     height: 30px;
-    width: 80%;
+    width: 100%;
 }
 
 .todo-button {
@@ -81,7 +104,7 @@ html, body {
 #todo-list-header-card {
     padding-top: 9.5px;
     height:30px;
-    width: 100%;
+    width: 99.2%;
     padding-bottom: 0px;
 }
 
@@ -90,32 +113,57 @@ html, body {
     top:7%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
+    scrollbar-width: thin;
+}
+
+#todo-list-items-div::-webkit-scrollbar {
+    width: 7px;
+}
+#todo-list-items-div::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+#todo-list-items-div::-webkit-scrollbar-thumb {
+    background-color: rgb(224, 224, 224);
+    border-radius: 10px;
+    border: 3px transparent;
+    background-clip: content-box;
 }
 
 .list-item-card {
     position: relative;
-    padding: 5px 0;
+    padding: 5px 0px;
     height: 5%;
     display: flex;
     flex-direction: row;
     vertical-align: middle;
 }
-
 .item-col {
-    width: 25%;
-    max-width: 25%;
+    width:25%;
     display:flex;
     vertical-align: middle;
     align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
 }
 input.item-col {
+    overflow: hidden;
     box-sizing: border-box
 }
+div.todo-list-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 input.todo-list-button {
     padding-top: 0px;
     width: 80%;
+    padding-left: 10px;
     height:43px;
-    margin-right:25%;
+    /* margin-right:25%; */
     box-sizing: border-box;
 }
 
